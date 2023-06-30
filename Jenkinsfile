@@ -1,5 +1,9 @@
 pipeline {
     agent any
+
+    environment {
+        function_name = 'java-sample'
+    }   
     stages {
 
         // CI Start
@@ -47,7 +51,9 @@ pipeline {
 
         // CD Started
 
-       
+       stage ('Deployments') {
+           parallel {
+               
         stage('Deploy to Dev') {
             steps {
                 echo 'Build'
@@ -65,4 +71,6 @@ pipeline {
             
     }
         // CD Ended
+}
+    }
 }
